@@ -4,18 +4,12 @@ custom:
   stage: ${opt:stage}
 provider:
   name: aws
-  runtime: nodejs18.x
   region: us-west-2
   deploymentBucket:
     name: alex-personal-website-stack-bucket-${self:custom.stage}
   stackTags:
     application: "PersonalWebsite"
     owner: "Alex"
-    # userArn: "arn:aws:iam::${self:provider.environment.ACCOUNT_ID}:user/Alex"
-
-# authorizer:
-  # arn: ${self:provider.environment.USER_POOL}
-#   arn: ${cf:${self:custom.subsys}-idm-service-dev.AuthorizerArn}
 
 resources:
   Resources:
@@ -50,8 +44,8 @@ resources:
     RestApiIdResource:
       Value: !GetAtt [RestApi, RestApiId]
       Export:
-        Name: "RestApiGatewayId"
+        Name: "PersonalWebsiteRestApiGatewayId"
     RootResourceId:
       Value: !GetAtt [RestApi, RootResourceId]
       Export:
-        Name: "RestApiRootResourceId"
+        Name: "PersonalWebsiteRestApiRootResourceId"
